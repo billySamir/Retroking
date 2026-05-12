@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>EstiloUrbano | Iniciar Sesión</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">👜 EstiloUrbano</a>
+        
+        <div class="buscador" style="visibility: hidden;">
+            <input type="text" placeholder="Buscar...">
+        </div>
+
+        <div class="nav-iconos">
+            <!-- Icono Modo Oscuro (Luna) -->
+            <button class="btn-icono" onclick="toggleModoOscuro()" title="Cambiar Tema">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+            
+            <!-- Icono Mi Cuenta (Usuario) -->
+            <button class="btn-icono" onclick="window.location.href='login.html'" title="Mi Cuenta">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </button>
+            
+            <!-- Icono Carrito -->
+            <button class="btn-icono" onclick="abrirCarrito()" title="Ver Carrito">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <span id="contador-carrito">0</span>
+            </button>
+            
+            <!-- Icono Menú (3 Líneas) -->
+            <button class="btn-icono icono-menu" onclick="abrirMenu()" title="Abrir Menú">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Paneles Ocultos del menú lateral -->
+    <div class="overlay" id="overlay" onclick="cerrarPaneles()"></div>
+    <div class="panel-lateral izquierdo" id="panel-menu">
+        <div class="panel-cabecera"><h3>Menú</h3><button class="btn-cerrar" onclick="cerrarPaneles()">✖</button></div>
+        <div class="panel-contenido enlaces-movil">
+            <a href="index.html">Inicio</a>
+            <a href="tienda.html">Tienda</a>
+            <a href="contacto.html">Contacto</a>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <h2>Bienvenido de nuevo</h2>
+        <p>Ingresa para ver tu historial y configurar tu cuenta.</p>
+        
+        <form id="form-login">
+            <input type="email" class="input-form" placeholder="Correo electrónico" required>
+            <input type="password" class="input-form" placeholder="Contraseña" required>
+            <button type="submit" class="btn-principal btn-full">Iniciar Sesión</button>
+        </form>
+        
+        <a href="#" id="link-registro" class="link-registro">¿No tienes cuenta? Regístrate aquí</a>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/login.js"></script>
+</body>
+</html>

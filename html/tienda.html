@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>EstiloUrbano | Catálogo</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/tienda.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">👜 EstiloUrbano</a>
+        
+        <div class="buscador" style="visibility: hidden;">
+            <input type="text" placeholder="Buscar...">
+        </div>
+
+        <div class="nav-iconos">
+            <!-- Icono Modo Oscuro (Luna) -->
+            <button class="btn-icono" onclick="toggleModoOscuro()" title="Cambiar Tema">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+            
+            <!-- Icono Mi Cuenta (Usuario) -->
+            <button class="btn-icono" onclick="window.location.href='login.html'" title="Mi Cuenta">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </button>
+            
+            <!-- Icono Carrito -->
+            <button class="btn-icono" onclick="abrirCarrito()" title="Ver Carrito">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <span id="contador-carrito">0</span>
+            </button>
+            
+            <!-- Icono Menú (3 Líneas) -->
+            <button class="btn-icono icono-menu" onclick="abrirMenu()" title="Abrir Menú">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+    </nav>
+
+    <main class="contenedor-tienda">
+        <aside class="filtros-lateral">
+            <h3>Filtros</h3>
+            <div class="grupo-filtro">
+                <label>Precio Máximo: S/ <span id="valor-precio">300</span></label>
+                <input type="range" id="filtro-precio" min="0" max="300" value="300" oninput="actualizarPrecioYFiltrar()">
+            </div>
+            <div class="grupo-filtro">
+                <label>Categoría</label>
+                <select id="filtro-categoria" onchange="filtrarProductos()">
+                    <option value="Todas">Todas</option>
+                    <option value="Zapatillas">Zapatillas</option>
+                    <option value="Ropa">Ropa</option>
+                    <option value="Canguros">Canguros</option>
+                    <option value="Sombreros">Sombreros</option>
+                    <option value="Polos">Polos</option>
+                </select>
+            </div>
+        </aside>
+
+        <section class="seccion-productos">
+            <!-- AQUÍ ESTÁ EL BUSCADOR AHORA -->
+            <div class="cabecera-tienda">
+                <div>
+                    <h2>Catálogo de Productos</h2>
+                    <p id="contador-resultados">Cargando resultados...</p>
+                </div>
+                <div class="buscador-tienda">
+                    <input type="text" id="input-busqueda" placeholder="🔍 Buscar zapatos, polos..." onkeyup="filtrarProductos()">
+                </div>
+            </div>
+            
+            <div class="grilla-productos" id="contenedor-grilla"></div>
+        </section>
+    </main>
+
+    <!-- Paneles Ocultos -->
+    <div class="overlay" id="overlay" onclick="cerrarPaneles()"></div>
+    <div class="panel-lateral" id="panel-carrito">
+        <div class="panel-cabecera"><h3>Tu Carrito</h3><button class="btn-cerrar" onclick="cerrarPaneles()">✖</button></div>
+        <div class="panel-contenido" id="lista-carrito"></div>
+        <div class="panel-footer"><h3>Total: S/ <span id="total-carrito">0.00</span></h3><button class="btn-principal" style="width: 100%; margin-top: 15px;" onclick="alert('¡Compra simulada con éxito!')">Pagar Ahora</button></div>
+    </div>
+    <div class="panel-lateral izquierdo" id="panel-menu">
+        <div class="panel-cabecera"><h3>Menú</h3><button class="btn-cerrar" onclick="cerrarPaneles()">✖</button></div>
+        <div class="panel-contenido enlaces-movil"><a href="index.html">Inicio</a><a href="tienda.html">Tienda</a><a href="contacto.html">Contacto</a></div>
+    </div>
+
+    <a href="https://wa.me/51987654321" target="_blank" class="btn-whatsapp">📱</a>
+
+    <script src="../js/datos.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        const contenedor = document.getElementById('contenedor-grilla');
+        
+        function renderizarProductos(lista) {
+            contenedor.innerHTML = '';
+            document.getElementById('contador-resultados').innerText = `${lista.length} resultados`;
+            
+            if(lista.length === 0) {
+                contenedor.innerHTML = "<p style='grid-column: 1 / -1; text-align: center; color: gray; margin-top: 50px;'>No se encontraron productos.</p>";
+                return;
+            }
+
+            lista.forEach(prod => {
+                contenedor.innerHTML += `
+                    <div class="tarjeta-producto">
+                        <a href="producto.html?id=${prod.id}" class="imagen-caja">
+                            <img src="${prod.imagen}" alt="${prod.nombre}">
+                        </a>
+                        <div class="info-producto">
+                            <span class="categoria">${prod.categoria} • ⭐ ${prod.estrellas}</span>
+                            <a href="producto.html?id=${prod.id}" class="titulo-enlace" style="text-decoration:none;"><h3>${prod.nombre}</h3></a>
+                            <div class="precio-fila">
+                                <span class="precio">S/ ${prod.precio.toFixed(2)}</span>
+                                <button class="btn-agregar" onclick="window.location.href='producto.html?id=${prod.id}'" title="Elegir opciones">+</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function actualizarPrecioYFiltrar() {
+            document.getElementById('valor-precio').innerText = document.getElementById('filtro-precio').value;
+            filtrarProductos();
+        }
+
+        function filtrarProductos() {
+            const inputBusqueda = document.getElementById('input-busqueda');
+            const texto = inputBusqueda ? inputBusqueda.value.toLowerCase() : "";
+            const precioMax = parseFloat(document.getElementById('filtro-precio').value);
+            const cat = document.getElementById('filtro-categoria').value;
+
+            const filtrados = productos.filter(p => {
+                const cumpleTexto = p.nombre.toLowerCase().includes(texto) || p.descripcion.toLowerCase().includes(texto);
+                const cumplePrecio = p.precio <= precioMax;
+                const cumpleCat = cat === "Todas" || p.categoria === cat;
+                return cumpleTexto && cumplePrecio && cumpleCat;
+            });
+            renderizarProductos(filtrados);
+        }
+
+        window.onload = () => {
+            const contador = document.getElementById('contador-carrito');
+            if(contador) contador.innerText = carrito.length;
+            renderizarProductos(productos);
+        };
+    </script>
+</body>
+</html>

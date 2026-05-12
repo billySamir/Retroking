@@ -1,0 +1,24 @@
+.hero { 
+    position: relative; 
+    min-height: calc(100vh - 80px); /* Esto evita el borde blanco de abajo */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    overflow: hidden; 
+    background-color: #111827; 
+}
+
+.video-fondo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+.hero-contenido { position: relative; z-index: 10; text-align: center; color: white; padding: 20px;}
+.subtitulo { display: block; color: #a5b4fc; letter-spacing: 3px; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; }
+.hero-contenido h1 { font-size: 60px; margin-bottom: 40px; text-shadow: 2px 2px 8px rgba(0,0,0,0.6); }
+
+/* SECCIÓN PRODUCTOS POPULARES */
+.promo-section { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+.promo-heading { text-align: center; font-size: 32px; margin-bottom: 40px; color: var(--texto-principal); }
+.promo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.promo-card { position: relative; height: 350px; border-radius: 20px; overflow: hidden; cursor: pointer; border: 1px solid var(--borde); }
+.promo-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.promo-card:hover img { transform: scale(1.1); }
+.promo-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); pointer-events: none; }
+.promo-card h3 { position: absolute; bottom: 25px; left: 25px; color: white; font-size: 24px; z-index: 2; text-shadow: 2px 2px 5px rgba(0,0,0,0.8); }

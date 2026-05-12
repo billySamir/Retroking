@@ -1,0 +1,136 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+:root {
+    --fondo: #f9fafb;
+    --fondo-nav: #ffffff;
+    --texto-principal: #111827;
+    --texto-secundario: #4b5563;
+    --primario: #4f46e5;
+    --borde: #e5e7eb;
+}
+
+body.dark-mode {
+    --fondo: #111827;
+    --fondo-nav: #1f2937;
+    --texto-principal: #f9fafb;
+    --texto-secundario: #9ca3af;
+    --borde: #374151;
+}
+
+body {
+    background-color: var(--fondo);
+    color: var(--texto-principal);
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh; /* Obliga al fondo a cubrir toda la pantalla siempre */
+}
+
+/* --- BARRA DE NAVEGACIÓN --- */
+.navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 50px; background-color: var(--fondo-nav);
+    border-bottom: 1px solid var(--borde); position: sticky; top: 0; z-index: 100;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+.logo { font-size: 24px; font-weight: bold; color: var(--primario); text-decoration: none; }
+
+/* --- ICONOS DE LA DERECHA (BARRAS Y CARRITO) --- */
+.nav-iconos { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+}
+
+.btn-icono { 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    color: var(--texto-principal); 
+    position: relative;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 50%;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.btn-icono svg {
+    width: 24px;
+    height: 24px;
+}
+
+.btn-icono:hover {
+    color: var(--primario);
+    background-color: var(--borde); /* Un fondo sutil al pasar el mouse */
+}
+
+/* El circulito rojo de notificación del carrito */
+#contador-carrito { 
+    position: absolute; 
+    top: 0px; 
+    right: 0px; 
+    background: #ef4444; 
+    color: white; 
+    border-radius: 50%; 
+    min-width: 18px; 
+    height: 18px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px; 
+    font-weight: bold; 
+    border: 2px solid var(--fondo-nav); /* Borde para que resalte sobre el carrito */
+}
+
+.icono-menu { 
+    display: inline-flex; 
+    margin-left: 10px;
+}
+
+/* Botón del menú (3 barras) siempre visible ahora */
+.icono-menu { 
+    display: inline-block; 
+    margin-left: 15px;
+}
+
+/* --- BOTÓN PRINCIPAL --- */
+.btn-principal {
+    display: inline-block; background-color: var(--primario); color: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-size: 16px; font-weight: bold; border: none; cursor: pointer; text-align: center; transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+}
+.btn-principal:hover { transform: scale(1.03); background-color: #4338ca; box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4); }
+
+/* --- WHATSAPP FLOTANTE --- */
+.btn-whatsapp { position: fixed; bottom: 20px; left: 20px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 35px; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 100; transition: transform 0.3s; }
+.btn-whatsapp:hover { transform: scale(1.1); }
+
+/* --- PANELES LATERALES --- */
+.overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; display: none; opacity: 0; transition: opacity 0.3s; }
+.overlay.activo { display: block; opacity: 1; }
+.panel-lateral { position: fixed; top: 0; right: -400px; width: 100%; max-width: 400px; height: 100vh; background-color: var(--fondo-nav); box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 201; transition: right 0.3s ease; display: flex; flex-direction: column; }
+.panel-lateral.abierto { right: 0; }
+.panel-lateral.izquierdo { right: auto; left: -400px; box-shadow: 5px 0 15px rgba(0,0,0,0.1); transition: left 0.3s ease; }
+.panel-lateral.izquierdo.abierto { left: 0; }
+.panel-cabecera { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid var(--borde); }
+.btn-cerrar { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--texto-secundario); transition: color 0.3s;}
+.btn-cerrar:hover { color: #ef4444; }
+.panel-contenido { padding: 20px; flex: 1; overflow-y: auto; }
+.panel-footer { padding: 20px; border-top: 1px solid var(--borde); background-color: var(--fondo); }
+
+/* Diseño dentro del carrito */
+.item-carrito { display: flex; margin-bottom: 15px; border-bottom: 1px solid var(--borde); padding-bottom: 15px; }
+.item-carrito img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; margin-right: 15px; border: 1px solid var(--borde);}
+.item-carrito-info { flex: 1; color: var(--texto-principal); }
+.item-carrito-info h4 { font-size: 14px; margin-bottom: 5px; line-height: 1.2;}
+.item-carrito-info p { font-size: 12px; color: var(--texto-secundario); margin-bottom: 5px;}
+.btn-eliminar { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 12px; font-weight: bold; padding: 5px 0;}
+.btn-eliminar:hover { text-decoration: underline; }
+
+/* Diseño del menú móvil */
+.enlaces-movil { display: flex; flex-direction: column; gap: 15px; }
+.enlaces-movil a { text-decoration: none; color: var(--texto-principal); font-size: 18px; font-weight: bold; border-bottom: 1px solid var(--borde); padding-bottom: 10px; }
+
+/* --- NOTIFICACIÓN TOAST --- */
+.toast-notificacion { position: fixed; bottom: 20px; right: -300px; background-color: #1f2937; color: white; padding: 15px 25px; border-radius: 10px; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: right 0.3s ease; z-index: 1000; }
+.toast-notificacion.mostrar { right: 20px; }
+
+@media (max-width: 768px) { .navbar { padding: 15px 20px; } .btn-principal { padding: 12px 25px; font-size: 14px; } }

@@ -1,0 +1,126 @@
+/* contacto.css - DISEÑO EXCLUSIVO PARA LA PÁGINA DE CONTACTO */
+
+.contenedor-contacto { 
+    max-width: 1000px; 
+    margin: 60px auto; 
+    padding: 0 20px; 
+}
+
+.tarjeta-contacto { 
+    display: flex; 
+    background-color: var(--fondo-nav); 
+    border-radius: 20px; 
+    overflow: hidden; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+    border: 1px solid var(--borde);
+}
+
+/* --- LADO IZQUIERDO: FORMULARIO --- */
+.formulario-seccion { 
+    flex: 1.5; /* Ocupa un poco más de espacio que el panel derecho */
+    padding: 50px; 
+}
+.formulario-seccion h3 { 
+    font-size: 28px; 
+    margin-bottom: 30px; 
+    color: var(--texto-principal); 
+}
+.grupo-input { margin-bottom: 25px; }
+.grupo-input label { 
+    display: block; 
+    margin-bottom: 8px; 
+    font-weight: 600; 
+    color: var(--texto-secundario); 
+    font-size: 14px; 
+}
+.grupo-input input, .grupo-input textarea { 
+    width: 100%; 
+    padding: 15px; 
+    border: 1px solid var(--borde); 
+    border-radius: 10px; 
+    background-color: var(--fondo); 
+    color: var(--texto-principal); 
+    font-size: 16px; 
+    outline: none; 
+    transition: border-color 0.3s;
+}
+.grupo-input input:focus, .grupo-input textarea:focus { 
+    border-color: var(--primario); 
+}
+
+.btn-enviar { 
+    width: 100%; 
+    background-color: var(--primario); 
+    color: white; 
+    border: none; 
+    padding: 16px; 
+    border-radius: 10px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: background-color 0.3s, transform 0.3s; 
+}
+.btn-enviar:hover { 
+    background-color: #4338ca;
+    transform: translateY(-2px);
+}
+
+/* --- LADO DERECHO: PANEL DE INFORMACIÓN --- */
+/* Arreglado para que siempre se vea bien, incluso en modo oscuro */
+.info-seccion { 
+    flex: 1; 
+    background-color: #111827; /* Se mantiene oscuro y elegante siempre */
+    color: white; 
+    padding: 50px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+}
+.info-seccion h3 { 
+    font-size: 24px; 
+    margin-bottom: 30px; 
+    color: white; /* Fuerza el blanco */
+}
+.info-seccion p { 
+    margin-bottom: 25px; 
+    font-size: 16px; 
+    line-height: 1.6; 
+    color: #d1d5db; /* Un gris muy claro que resalta bien en el fondo negro */
+    display: flex;
+    align-items: center;
+}
+
+.redes-sociales { 
+    margin-top: 40px; 
+    padding-top: 30px; 
+    border-top: 1px solid #374151; 
+}
+.redes-sociales h4 { 
+    margin-bottom: 25px; 
+    color: white; 
+}
+
+/* --- BOTÓN DE INSTAGRAM ARREGLADO --- */
+.btn-instagram { 
+    display: inline-flex; 
+    align-items: center;
+    gap: 10px;
+    padding: 12px 25px; 
+    border-radius: 50px; 
+    text-decoration: none; 
+    font-weight: bold; 
+    font-size: 16px;
+    color: white !important; /* Texto siempre blanco */
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); 
+    transition: transform 0.3s, box-shadow 0.3s; 
+}
+.btn-instagram:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 20px rgba(220, 39, 67, 0.4); /* Sombra difuminada con los colores de Instagram */
+}
+
+/* Diseño Responsivo para el Contacto */
+@media (max-width: 768px) { 
+    .tarjeta-contacto { flex-direction: column; } 
+    .formulario-seccion, .info-seccion { padding: 30px; }
+}

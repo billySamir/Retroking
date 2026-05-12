@@ -1,0 +1,116 @@
+/* tienda.css - ESTILOS EXCLUSIVOS PARA EL CATÁLOGO */
+
+.contenedor-tienda { 
+    display: flex; 
+    max-width: 1300px; 
+    margin: 0 auto; 
+    padding: 40px 20px; 
+    gap: 30px; 
+}
+
+/* Barra lateral de filtros */
+.filtros-lateral { 
+    width: 260px; 
+    background-color: var(--fondo-nav); 
+    padding: 25px; 
+    border-radius: 15px; 
+    border: 1px solid var(--borde); 
+    height: fit-content;
+    position: sticky;
+    top: 100px; 
+}
+.filtros-lateral h3 { margin-bottom: 25px; color: var(--texto-principal); font-size: 20px; border-bottom: 2px solid var(--fondo); padding-bottom: 10px;}
+.grupo-filtro { margin-bottom: 25px; }
+.grupo-filtro label { display: block; margin-bottom: 10px; font-weight: bold; font-size: 14px; color: var(--texto-secundario); }
+.grupo-filtro input[type="range"] { width: 100%; accent-color: var(--primario); cursor: pointer;}
+.grupo-filtro select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--borde); background-color: var(--fondo); color: var(--texto-principal); font-weight: bold; cursor: pointer; outline: none;}
+.grupo-filtro select:focus { border-color: var(--primario); }
+
+/* Grilla de productos y Buscador Nuevo */
+.seccion-productos { flex: 1; }
+
+.cabecera-tienda { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 30px; 
+    flex-wrap: wrap; /* Para que en celulares se ponga uno debajo del otro */
+    gap: 15px;
+}
+.cabecera-tienda h2 { font-size: 28px; color: var(--texto-principal); margin-bottom: 5px;}
+.cabecera-tienda p { color: var(--texto-secundario); font-weight: 500;}
+
+/* ESTILOS DEL NUEVO BUSCADOR */
+.buscador-tienda input {
+    padding: 12px 20px; 
+    border-radius: 50px; 
+    border: 1px solid var(--borde); 
+    width: 300px; 
+    background-color: var(--fondo-nav); 
+    color: var(--texto-principal); 
+    outline: none;
+    font-size: 15px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.buscador-tienda input:focus { 
+    border-color: var(--primario); 
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+.grilla-productos { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px; }
+
+.tarjeta-producto { 
+    background-color: var(--fondo-nav); 
+    border-radius: 20px; 
+    overflow: hidden; 
+    border: 1px solid var(--borde); 
+    transition: transform 0.3s, box-shadow 0.3s; 
+    display: flex;
+    flex-direction: column;
+}
+.tarjeta-producto:hover { 
+    transform: translateY(-8px); 
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1); 
+}
+
+.imagen-caja { display: block; width: 100%; height: 260px; overflow: hidden; background-color: #f3f4f6; }
+.imagen-caja img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.tarjeta-producto:hover .imagen-caja img { transform: scale(1.08); }
+
+.info-producto { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+.categoria { font-size: 12px; color: var(--texto-secundario); font-weight: bold; display: block; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;}
+.info-producto h3 { font-size: 18px; color: var(--texto-principal); margin-bottom: 20px; line-height: 1.4; transition: color 0.3s;}
+.info-producto h3:hover { color: var(--primario); }
+
+.precio-fila { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--borde); padding-top: 20px; margin-top: auto; }
+.precio { font-size: 22px; font-weight: 900; color: var(--texto-principal); }
+
+.btn-agregar { 
+    background-color: var(--texto-principal); 
+    color: var(--fondo-nav); 
+    border: none; 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    font-size: 26px; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    line-height: 0; 
+    transition: transform 0.3s, background-color 0.3s; 
+}
+.btn-agregar:hover { 
+    background-color: var(--primario); 
+    transform: scale(1.1) rotate(90deg); 
+}
+
+/* Diseño Responsivo Celular */
+@media (max-width: 900px) {
+    .contenedor-tienda { flex-direction: column; }
+    .filtros-lateral { width: 100%; position: relative; top: 0; }
+}
+@media (max-width: 600px) {
+    .buscador-tienda { width: 100%; }
+    .buscador-tienda input { width: 100%; } /* El buscador ocupa todo el ancho en celular */
+}
